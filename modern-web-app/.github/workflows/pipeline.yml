@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello world step!
-        run: echo "Hello Wordl!"
+        run: echo "Hello Wordl"
