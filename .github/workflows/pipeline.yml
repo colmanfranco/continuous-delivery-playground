@@ -1,7 +1,8 @@
 name: CI/CD Pipeline
 
 on: push
-default:
+
+defaults:
   run:
     working-directory: modern-web-app
 
