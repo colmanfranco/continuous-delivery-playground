@@ -1,9 +1,32 @@
 name: CI/CD Pipeline
 
 on: push
+defaults:
+  run:
+    working-directory: modern-web-app
+
+env:
+  NODE_VERSION: "14.17"
+
 jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps:
       - name: Hello world step!
         run: echo "Hello Wordl"
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Run unit tests
+        run: |
+          npm ci
+          npm run test:unit
