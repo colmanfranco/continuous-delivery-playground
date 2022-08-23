@@ -1,13 +1,27 @@
 name: CI/CD Pipeline
-
+concurrency: ${{ github.workflow }}
 on: push
 env:
   NODE_VERSION: 16.16
 
 jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    name: Run Unit Tests
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - uses: ./.github/actions/install-dependencies
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Run unit tests
+        run: |
+          npm ci
+          npm run test:unit
   run-smoke-tests:
     runs-on: ubuntu-latest
-    name: This is my pipeline
+    name: Run Smoke tests 💘
     defaults:
       run:
         shell: bash
