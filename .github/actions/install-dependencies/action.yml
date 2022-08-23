@@ -1,9 +1,6 @@
 name: 'Install dependencies'
 description: ''
 
-defaults:
-  run:
-    working-directory: modern-web-app
 runs:
   using: 'composite'
   steps:
