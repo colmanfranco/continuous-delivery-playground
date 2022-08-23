@@ -1,11 +1,6 @@
 name: CI/CD Pipeline
 
 on: push
-
-defaults:
-  run:
-    working-directory: modern-web-app
-
 env:
   NODE_VERSION: 16.16
 

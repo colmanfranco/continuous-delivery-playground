@@ -26,7 +26,7 @@ runs:
         yarn install --frozen-lockfile
 
     - name: Cache Playwright binaries ✨
-    - uses: actions/cache@v3
+      uses: actions/cache@v3
       id: playwright-cache
       with:
         path: '~/.cache/ms-playwright'
