@@ -7,7 +7,7 @@ env:
 jobs:
   run-smoke-tests:
     runs-on: ubuntu-latest
-    name: Run smoke test
+    name: This is my pipeline
     defaults:
       run:
         shell: bash
