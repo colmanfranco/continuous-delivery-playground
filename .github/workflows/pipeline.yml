@@ -30,3 +30,18 @@ jobs:
       - uses: ./.github/actions/playwright-dependencies
       - name: Install and run e2e tests 🔧
         run: npx playwright test
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    name: Notify on failure 🚨
+    needs: [unit-tests, run-smoke-tests]
+    steps:
+      - name: Notify dedicated teams channel
+        uses: colmanfranco/ms-teams-notification@v1.3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github-token: ${{ github.token }}
+          ms-teams-webhook-uri: ${{ secrets.MSTEAMS_WEBHOOK }}
+          notification-summary: 'WEBSITE CI: Pipeline Failed'
+          notification-color: 'b53737'
+          timezone: Europe/Madrid
