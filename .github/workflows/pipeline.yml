@@ -10,42 +10,6 @@ env:
   NODE_VERSION: "14.17"
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Run unit tests
-        run: |
-          npm ci
-          npm run test:unit
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: modern-web-app-v${{ github.sha }}
-          path: modern-web-app/.next/
-      - name: Deploy to prod environment
-        run: |
-          npm run deploy:simulate -- production
-
-
-          name: Smoke tests
-concurrency: ${{ github.workflow }}
-on:
-  push:
-    branches:
-      - main
-
-defaults:
-  run:
-    working-directory: modern-web-app
-jobs:
   run-smoke-tests:
     runs-on: ubuntu-latest
     name: Run smoke test
