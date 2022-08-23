@@ -1,0 +1,21 @@
+name: 'Install dependencies'
+description: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache Playwright binaries ✨
+      uses: actions/cache@v3
+      id: playwright-cache
+      with:
+        path: '~/.cache/ms-playwright'
+        key: '${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}'
+        restore-keys: ${{ runner.os }}-playwright-
+    - name: Install Playwright with dependencies
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: npx playwright install --with-deps
+    - name: Install Playwright's dependencies
+      if: steps.playwright-cache.outputs.cache-hit == 'true'
+      shell: bash
+      run: npx playwright install-deps
