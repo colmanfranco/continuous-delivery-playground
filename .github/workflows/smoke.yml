@@ -1,0 +1,21 @@
+name: Smoke tests
+concurrency: ${{ github.workflow }}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  run-smoke-tests:
+    runs-on: ubuntu-latest
+    name: Run smoke test
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: 🔎 Check IP
+        run: curl https://api.ipify.org
+      - uses: ./.github/actions/install-dependencies
+      - name: Install and run e2e tests 🔧
+        run: npx playwright test
