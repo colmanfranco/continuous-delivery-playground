@@ -12,8 +12,6 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
       - uses: ./.github/actions/install-dependencies
-        with:
-          node-version: ${{ env.NODE_VERSION }}
       - name: Run unit tests
         run: |
           npm ci
