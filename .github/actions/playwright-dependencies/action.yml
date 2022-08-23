@@ -4,6 +4,9 @@ description: ''
 runs:
   using: 'composite'
   steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+    - uses: ./.github/actions/unit-test-dependencies
     - name: Cache Playwright binaries ✨
       uses: actions/cache@v3
       id: playwright-cache
